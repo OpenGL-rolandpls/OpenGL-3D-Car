@@ -181,6 +181,7 @@ def drawCar():
 	glEnd()
 
 	#top
+	glColor3f(240/255, 20/255, 55/255)
 	glBegin(GL_QUADS)
 	glVertex3f(-3.0, 1.5, -z)
 	glVertex3f(-3.0, 1.5, z)
@@ -189,6 +190,7 @@ def drawCar():
 	glEnd()
 
 	#bottom
+	glColor3f(190/255, 20/255, 55/255)
 	glBegin(GL_QUADS)
 	glVertex3f(-3.0, -1.0, -z)
 	glVertex3f(-3.0, -1.0, z)
@@ -197,6 +199,7 @@ def drawCar():
 	glEnd()
 
 	#front
+	glColor3f(206/255, 20/255, 55/255)
 	glBegin(GL_QUADS)
 	glVertex3f(3.0, -1.0, -z)
 	glVertex3f(3.0, 0.15, -z)
@@ -205,6 +208,7 @@ def drawCar():
 	glEnd()
 
 	#front cover
+	glColor3f(230/255, 20/255, 55/255)
 	glBegin(GL_QUADS)
 	glVertex3f(3.0, 0.15, -z)
 	glVertex3f(1.2, 0.25, -z)
@@ -212,15 +216,32 @@ def drawCar():
 	glVertex3f(3.0, 0.15, z)
 	glEnd()
 
-	#front window
+	#front window frame
+	glColor3f(235/255, 20/255, 55/255)
 	glBegin(GL_QUADS)
 	glVertex3f(0.5, 1.5, -z)
 	glVertex3f(0.5, 1.5, z)
+	glVertex3f(0.55, 1.42, z)
+	glVertex3f(0.55, 1.42, -z)
+
+	glVertex3f(1.15, 0.34, -z)
+	glVertex3f(1.15, 0.34, -z+0.1)
+	glVertex3f(0.55, 1.42, -z+0.1)
+	glVertex3f(0.55, 1.42, -z)
+
+	glVertex3f(1.15, 0.34, z)
+	glVertex3f(1.15, 0.34, z-0.1)
+	glVertex3f(0.55, 1.42, z-0.1)
+	glVertex3f(0.55, 1.42, z)
+
+	glVertex3f(1.15, 0.34, -z)
+	glVertex3f(1.15, 0.34, z)
 	glVertex3f(1.2, 0.25, z)
 	glVertex3f(1.2, 0.25, -z)
 	glEnd()
 
 	#left back
+	glColor3f(206/255, 20/255, 55/255)
 	glBegin(GL_POLYGON)
 	glVertex3f(0.5, 1.5, -z)
 	glVertex3f(1.2, 0.25, -z)
@@ -254,8 +275,17 @@ def drawCar():
 	glVertex3f(1.2, -1.0, z)
 	glEnd()
 
-	
-	
+	#front window glass
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+	glEnable(GL_BLEND)
+	glColor4f(90/255, 90/255, 90/255, 0.3)
+	glBegin(GL_QUADS)
+	glVertex3f(0.55, 1.42, -z+0.1)
+	glVertex3f(0.55, 1.42, z-0.1)
+	glVertex3f(1.15, 0.34, z-0.1)
+	glVertex3f(1.15, 0.34, -z+0.1)
+	glEnd()
+	glDisable(GL_BLEND)
 
 def renderScene():
 	global x, z, dX, dZ, angle, camera
