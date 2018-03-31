@@ -27,6 +27,7 @@ ydiff = 0.0
 
 mouseDown = False
 
+################### CAMERA CONTROL #####################
 class Camera:
 	
 	def __init__(self):
@@ -88,64 +89,6 @@ def mouseMotion(x, y):
 		xrot = y + ydiff
 		#print(mouseDown)
 
-# Snowman
-def drawSnowMan():
-	glColor3f(1.0, 1.0, 1.0)
-
-	#Draw Body
-	glTranslatef(0.0 ,0.75, 0.0)
-	glutSolidSphere(0.75,20,20)
-
-	#Draw Head
-	glTranslatef(0.0, 1.0, 0.0)
-	glutSolidSphere(0.25,20,20)
-
-	#Draw Eyes
-	glPushMatrix()
-	glColor3f(0.0,0.0,0.0)
-	glTranslatef(0.05, 0.10, 0.18)
-	glutSolidSphere(0.05,10,10)
-	glTranslatef(-0.1, 0.0, 0.0)
-	glutSolidSphere(0.05,10,10)
-	glPopMatrix()
-
-	#Draw Nose
-	glColor3f(1.0, 0.5 , 0.5)
-	glutSolidCone(0.08,0.5,10,2)
-
-def renderScene():
-	global x, z, dX, dZ, angle
-	#Clear Color and Depth Buffers
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-
-	#Reset transformations
-	glLoadIdentity()
-	#Set the camera
-	#gluLookAt	(	x, 1.0, z,
-	#			x+dX, 1.0,  z+dZ,
-	#			0.0, 1.0,  0.0
-	#			)
-		
-	camera.apply()
-	
-	#Draw ground
-
-    #Draw 36 Snowmen
-	# for i in range (-3,3):
-	# 	for j in range(-3,3):
-	# 		glPushMatrix()
-	# 		glTranslatef(i*10.0,0,j * 10.0)
-	# 		drawSnowMan()
-	# 		glPopMatrix()
-		
-	camera.rotate(xrot*0.001, 0.0, 0.0)
-	camera.rotate(0, yrot*0.001, 0.0)
-	
-	drawSnowMan()
-	idle()
-	glFlush()
-	glutSwapBuffers()
-	
 def processSpecialKeys(key, xx, yy):
 	global x, z, dX, dZ, angle
 	fraction = 0.1
@@ -177,6 +120,110 @@ def processSpecialKeys(key, xx, yy):
 def processNormalKeys(key, x, y):
 	if (key == 27):
 		exit(0)
+
+################### OBJECTS #####################
+# Snowman
+def drawSnowMan():
+	glColor3f(1.0, 1.0, 1.0)
+
+	#Draw Body
+	glTranslatef(0.0 ,0.75, 0.0)
+	glutSolidSphere(0.75,20,20)
+
+	#Draw Head
+	glTranslatef(0.0, 1.0, 0.0)
+	glutSolidSphere(0.25,20,20)
+
+	#Draw Eyes
+	glPushMatrix()
+	glColor3f(0.0,0.0,0.0)
+	glTranslatef(0.05, 0.10, 0.18)
+	glutSolidSphere(0.05,10,10)
+	glTranslatef(-0.1, 0.0, 0.0)
+	glutSolidSphere(0.05,10,10)
+	glPopMatrix()
+
+	#Draw Nose
+	glColor3f(1.0, 0.5 , 0.5)
+	glutSolidCone(0.08,0.5,10,2)
+
+def drawCylinder(height, radius):
+	glBegin(GL_QUAD_STRIP)
+	for i in range(0,360,1):
+		glColor3f(1.0,0.5,0.0)
+		glVertex3f(radius*cos(i),height/2.0,radius*sin(i))
+		glVertex3f(radius*cos(i),-height/2.0,radius*sin(i))
+	glEnd()
+
+    # top and bottom circles
+    # reuse the currentTexture on top and bottom)
+	i = -height/2.0
+	jump = height
+
+	while (i<=height/2.0):
+		glBegin(GL_TRIANGLE_FAN)
+		glColor3f(1.0,0.5,0.0)
+		glVertex3f(0,i,0)
+		for k in range(0,360,1):
+			glVertex3f(radius*cos(k),i,radius*sin(k))
+		glEnd()
+		i += jump
+
+#def drawCar():
+
+
+def renderScene():
+	global x, z, dX, dZ, angle, camera
+	#Clear Color and Depth Buffers
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+	#Reset transformations
+	glLoadIdentity()
+	#Set the camera
+	#gluLookAt	(	x, 1.0, z,
+	#			x+dX, 1.0,  z+dZ,
+	#			0.0, 1.0,  0.0
+	#			)
+
+	
+	glEnable(GL_LIGHT0)
+	glEnable(GL_LIGHTING)
+
+	glEnable(GL_DEPTH_TEST)
+	glDepthFunc(GL_LEQUAL)
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST)
+	
+	glShadeModel(GL_SMOOTH)
+	
+	glEnable(GL_COLOR_MATERIAL)
+	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE)
+	glEnable(GL_TEXTURE_2D)
+	
+	specReflection = [1.0, 1.0, 1.0, 1.0]
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specReflection)
+	glMateriali(GL_FRONT, GL_SHININESS, 30)
+	#glLightfv(GL_LIGHT0, GL_SPECULAR, specReflection)
+	glLightfv(GL_LIGHT0, GL_POSITION, [2.0, 2.0, 2.0, 1.0])
+	camera.apply()
+	
+	#Draw ground
+
+    #Draw 36 Snowmen
+	# for i in range (-3,3):
+	# 	for j in range(-3,3):
+	# 		glPushMatrix()
+	# 		glTranslatef(i*10.0,0,j * 10.0)
+	# 		drawSnowMan()
+	# 		glPopMatrix()
+		
+	camera.rotate(xrot*0.001, 0.0, 0.0)
+	camera.rotate(0, yrot*0.001, 0.0)
+	
+	#drawSnowMan()
+	drawCylinder(0.5,0.25)
+	idle()
+	glFlush()
+	glutSwapBuffers()
 
 def changeSize(w, h):
 	#Prevent a divide by zero, when window is too short
