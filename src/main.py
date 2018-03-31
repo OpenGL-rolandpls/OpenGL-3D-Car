@@ -18,6 +18,14 @@ dX = 0.0
 
 dZ = 0.0				# Camera direction
 
+# mouse
+xrot = 0.0
+yrot = 0.0
+ 
+xdiff = 0.0
+ydiff = 0.0
+
+mouseDown = False
 
 class Camera:
 	
@@ -40,6 +48,45 @@ class Camera:
 		glRotated(self.rotation[2], 0, 0, -1)
 		
 camera = Camera()
+
+def idle():
+	global mouseDown, xrot, yrot
+	if (not mouseDown):
+		
+		if(xrot > 1):
+			xrot -= 0.001 * xrot
+		elif(xrot < -1):
+			xrot += 0.001 * -xrot 
+		else:
+			xrot = 0
+
+		if(yrot > 1):
+			yrot -= 0.001 * yrot
+		elif(yrot < -1):
+			yrot += 0.001 * -yrot
+		else:
+			yrot = 0	
+
+def mouse(button, state, x, y):
+	global xdiff, ydiff, mouseDown
+	# print(str(button) + " " + str(GLUT_LEFT_BUTTON))
+	# print(str(state) + " " + str(GLUT_DOWN))
+	if (button == GLUT_LEFT_BUTTON and state == GLUT_DOWN):
+		mouseDown = True
+		
+		xdiff = x - yrot
+		ydiff = -y + xrot
+		print(str(xdiff)+ " "+ str(ydiff))
+	
+	else:
+		mouseDown = False
+
+def mouseMotion(x, y):
+	global yrot, xrot, mouseDown
+	if (mouseDown):
+		yrot = x - xdiff
+		xrot = y + ydiff
+		#print(mouseDown)
 
 # Snowman
 def drawSnowMan():
@@ -78,19 +125,25 @@ def renderScene():
 	#			x+dX, 1.0,  z+dZ,
 	#			0.0, 1.0,  0.0
 	#			)
-	
+		
 	camera.apply()
 	
 	#Draw ground
 
     #Draw 36 Snowmen
-	for i in range (-3,3):
-		for j in range(-3,3):
-			glPushMatrix()
-			glTranslatef(i*10.0,0,j * 10.0)
-			drawSnowMan()
-			glPopMatrix()
-
+	# for i in range (-3,3):
+	# 	for j in range(-3,3):
+	# 		glPushMatrix()
+	# 		glTranslatef(i*10.0,0,j * 10.0)
+	# 		drawSnowMan()
+	# 		glPopMatrix()
+		
+	camera.rotate(xrot*0.001, 0.0, 0.0)
+	camera.rotate(0, yrot*0.001, 0.0)
+	
+	drawSnowMan()
+	idle()
+	glFlush()
 	glutSwapBuffers()
 	
 def processSpecialKeys(key, xx, yy):
@@ -125,7 +178,7 @@ def changeSize(w, h):
 	#Prevent a divide by zero, when window is too short
 	#(you cant make a window of zero width).
 	if (h == 0):
-		h = 1;
+		h = 1
 	ratio = w * 1.0 / h
 
 	#Use the Projection Matrix
@@ -162,6 +215,8 @@ def main():
 	glutIdleFunc(renderScene)
 	#glutKeyboardFunc(processNormalKeys)
 	glutSpecialFunc(processSpecialKeys)
+	glutMouseFunc(mouse)
+	glutMotionFunc(mouseMotion)
 
 	#OpenGL init
 	glEnable(GL_DEPTH_TEST)
