@@ -77,9 +77,9 @@ def mouse(button, state, x, y):
 		xdiff = x - yrot
 		ydiff = -y + xrot
 		print(str(xdiff)+ " "+ str(ydiff))
-	
 	else:
 		mouseDown = False
+
 
 def mouseMotion(x, y):
 	global yrot, xrot, mouseDown
@@ -162,13 +162,17 @@ def processSpecialKeys(key, xx, yy):
 		#dX = sin(angle)
 		#dY = -cos(angle)
 	elif (key == GLUT_KEY_UP):
-		camera.translate(0, 0, movespeed)
+		camera.translate(0, -movespeed, 0)
 		#x += dX * fraction
 		#z += dZ * fraction
 	elif (key == GLUT_KEY_DOWN):
-		camera.translate(0, 0, -movespeed)
+		camera.translate(0, movespeed, 0)
 		#x -= dX * fraction
 		#z -= dZ * fraction
+	elif (key == GLUT_KEY_PAGE_UP):
+		camera.translate(0, 0, movespeed)
+	elif (key == GLUT_KEY_PAGE_DOWN):
+		camera.translate(0, 0, -movespeed)
 
 def processNormalKeys(key, x, y):
 	if (key == 27):
