@@ -55,16 +55,16 @@ def idle():
 	if (not mouseDown):
 		
 		if(xrot > 1):
-			xrot -= 0.001 * xrot
+			xrot -= 0.005 * xrot
 		elif(xrot < -1):
-			xrot += 0.001 * -xrot 
+			xrot += 0.005 * -xrot 
 		else:
 			xrot = 0
 
 		if(yrot > 1):
-			yrot -= 0.001 * yrot
+			yrot -= 0.005 * yrot
 		elif(yrot < -1):
-			yrot += 0.001 * -yrot
+			yrot += 0.005 * -yrot
 		else:
 			yrot = 0	
 
@@ -169,8 +169,93 @@ def drawCylinder(height, radius):
 		glEnd()
 		i += jump
 
-#def drawCar():
+def drawCar():
+	z = 1.5 
+	#back
+	glColor3f(206/255, 20/255, 55/255)
+	glBegin(GL_QUADS)
+	glVertex3f(-3.0, 1.5, -z)
+	glVertex3f(-3.0, 1.5, z)
+	glVertex3f(-3.0, -1.0, z)
+	glVertex3f(-3.0, -1.0, -z)
+	glEnd()
 
+	#top
+	glBegin(GL_QUADS)
+	glVertex3f(-3.0, 1.5, -z)
+	glVertex3f(-3.0, 1.5, z)
+	glVertex3f(0.5, 1.5, z)
+	glVertex3f(0.5, 1.5, -z)
+	glEnd()
+
+	#bottom
+	glBegin(GL_QUADS)
+	glVertex3f(-3.0, -1.0, -z)
+	glVertex3f(-3.0, -1.0, z)
+	glVertex3f(3.0, -1.0, z)
+	glVertex3f(3.0, -1.0, -z)
+	glEnd()
+
+	#front
+	glBegin(GL_QUADS)
+	glVertex3f(3.0, -1.0, -z)
+	glVertex3f(3.0, 0.15, -z)
+	glVertex3f(3.0, 0.15, z)
+	glVertex3f(3.0, -1.0, z)
+	glEnd()
+
+	#front cover
+	glBegin(GL_QUADS)
+	glVertex3f(3.0, 0.15, -z)
+	glVertex3f(1.2, 0.25, -z)
+	glVertex3f(1.2, 0.25, z)
+	glVertex3f(3.0, 0.15, z)
+	glEnd()
+
+	#front window
+	glBegin(GL_QUADS)
+	glVertex3f(0.5, 1.5, -z)
+	glVertex3f(0.5, 1.5, z)
+	glVertex3f(1.2, 0.25, z)
+	glVertex3f(1.2, 0.25, -z)
+	glEnd()
+
+	#left back
+	glBegin(GL_POLYGON)
+	glVertex3f(0.5, 1.5, -z)
+	glVertex3f(1.2, 0.25, -z)
+	glVertex3f(1.2, -1.0, -z)
+	glVertex3f(-3.0, -1.0, -z)
+	glVertex3f(-3.0, 1.5, -z)
+	glEnd()
+
+	#left front
+	glBegin(GL_POLYGON)
+	glVertex3f(1.2, 0.25, -z)
+	glVertex3f(3.0, 0.15, -z)
+	glVertex3f(3.0, -1.0, -z)
+	glVertex3f(1.2, -1.0, -z)
+	glEnd()
+
+	#right back
+	glBegin(GL_POLYGON)
+	glVertex3f(0.5, 1.5, z)
+	glVertex3f(1.2, 0.25, z)
+	glVertex3f(1.2, -1.0, z)
+	glVertex3f(-3.0, -1.0, z)
+	glVertex3f(-3.0, 1.5, z)
+	glEnd()
+
+	#right front
+	glBegin(GL_POLYGON)
+	glVertex3f(1.2, 0.25, z)
+	glVertex3f(3.0, 0.15, z)
+	glVertex3f(3.0, -1.0, z)
+	glVertex3f(1.2, -1.0, z)
+	glEnd()
+
+	
+	
 
 def renderScene():
 	global x, z, dX, dZ, angle, camera
@@ -220,7 +305,9 @@ def renderScene():
 	camera.rotate(0, yrot*0.001, 0.0)
 	
 	#drawSnowMan()
-	drawCylinder(0.5,0.25)
+	#drawCylinder(0.5,0.25)
+	drawCar()
+
 	idle()
 	glFlush()
 	glutSwapBuffers()
