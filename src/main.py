@@ -146,13 +146,13 @@ def drawSnowMan():
 	glPopMatrix()
 
 	#Draw Nose
-	glColor3f(1.0, 0.5 , 0.5)
-	glutSolidCone(0.08,0.5,10,2)
+	glColor3f(1.0, 0.6 , 0.6)
+	glutSolidCone(0.08,0.6,10,2)
 
 def drawCylinder(height, radius):
 	glBegin(GL_QUAD_STRIP)
 	for i in range(0,360,1):
-		glColor3f(1.0,0.5,0.0)
+		glColor3f(1.0,0.6,0.0)
 		glVertex3f(radius*cos(i),height/2.0,radius*sin(i))
 		glVertex3f(radius*cos(i),-height/2.0,radius*sin(i))
 	glEnd()
@@ -164,7 +164,7 @@ def drawCylinder(height, radius):
 
 	while (i<=height/2.0):
 		glBegin(GL_TRIANGLE_FAN)
-		glColor3f(1.0,0.5,0.0)
+		glColor3f(1.0,0.6,0.0)
 		glVertex3f(0,i,0)
 		for k in range(0,360,1):
 			glVertex3f(radius*cos(k),i,radius*sin(k))
@@ -187,8 +187,8 @@ def drawCar():
 	glBegin(GL_QUADS)
 	glVertex3f(-3.0, 1.5, -z)
 	glVertex3f(-3.0, 1.5, z)
-	glVertex3f(0.5, 1.5, z)
-	glVertex3f(0.5, 1.5, -z)
+	glVertex3f(0.6, 1.5, z)
+	glVertex3f(0.6, 1.5, -z)
 	glEnd()
 
 	#bottom
@@ -221,20 +221,20 @@ def drawCar():
 	#front window frame
 	glColor3f(235/255, 20/255, 55/255)
 	glBegin(GL_QUADS)
-	glVertex3f(0.5, 1.5, -z)
-	glVertex3f(0.5, 1.5, z)
-	glVertex3f(0.55, 1.42, z)
-	glVertex3f(0.55, 1.42, -z)
+	glVertex3f(0.6, 1.5, -z)
+	glVertex3f(0.6, 1.5, z)
+	glVertex3f(0.65, 1.42, z)
+	glVertex3f(0.65, 1.42, -z)
 
 	glVertex3f(1.15, 0.34, -z)
 	glVertex3f(1.15, 0.34, -z+0.1)
-	glVertex3f(0.55, 1.42, -z+0.1)
-	glVertex3f(0.55, 1.42, -z)
+	glVertex3f(0.65, 1.42, -z+0.1)
+	glVertex3f(0.65, 1.42, -z)
 
 	glVertex3f(1.15, 0.34, z)
 	glVertex3f(1.15, 0.34, z-0.1)
-	glVertex3f(0.55, 1.42, z-0.1)
-	glVertex3f(0.55, 1.42, z)
+	glVertex3f(0.65, 1.42, z-0.1)
+	glVertex3f(0.65, 1.42, z)
 
 	glVertex3f(1.15, 0.34, -z)
 	glVertex3f(1.15, 0.34, z)
@@ -245,7 +245,7 @@ def drawCar():
 	#left back
 	glColor3f(206/255, 20/255, 55/255)
 	glBegin(GL_POLYGON)
-	glVertex3f(0.5, 1.5, -z)
+	glVertex3f(0.6, 1.5, -z)
 	glVertex3f(1.2, 0.25, -z)
 	glVertex3f(1.2, -1.0, -z)
 	glVertex3f(-3.0, -1.0, -z)
@@ -262,7 +262,7 @@ def drawCar():
 
 	#right back
 	glBegin(GL_POLYGON)
-	glVertex3f(0.5, 1.5, z)
+	glVertex3f(0.6, 1.5, z)
 	glVertex3f(1.2, 0.25, z)
 	glVertex3f(1.2, -1.0, z)
 	glVertex3f(-3.0, -1.0, z)
@@ -282,42 +282,54 @@ def drawCar():
 	glEnable(GL_BLEND)
 	glColor4f(90/255, 90/255, 90/255, 0.3)
 	glBegin(GL_QUADS)
-	glVertex3f(0.55, 1.42, -z+0.1)
-	glVertex3f(0.55, 1.42, z-0.1)
-	glVertex3f(1.15, 0.34, z-0.1)
-	glVertex3f(1.15, 0.34, -z+0.1)
+	glVertex3f(0.65, 1.42, -z)
+	glVertex3f(0.65, 1.42, -z)
+	glVertex3f(1.15, 0.34, -z)
+	glVertex3f(1.15, 0.34, -z)
 	glEnd()
 	glDisable(GL_BLEND)
 	
+	# Car's Wheel
+	glColor3f(0.0, 0.0, 0.0)
 	quadric = gluNewQuadric()
 	gluQuadricNormals(quadric, GLU_SMOOTH)
 	gluQuadricTexture(quadric, GL_TRUE)
 	glTranslatef(1.7,-1.0,-1.7)
-	gluCylinder(quadric,0.5,0.5,0.2,15,15)
-	gluDisk(quadric, 0, 0.5, 15, 15)
+	gluCylinder(quadric,0.6,0.6,0.2,15,15)
+	gluDisk(quadric, 0, 0.6, 15, 15)
 	glTranslatef(0.0,0.0,0.2)
-	gluDisk(quadric, 0, 0.5, 15, 15)
+	gluDisk(quadric, 0, 0.6, 15, 15)
 	
 	glTranslatef(0.0, 0.0, -0.2)
 	glTranslatef(-3.3, 0.0, 0.0)
-	gluCylinder(quadric,0.5,0.5,0.2,15,15)
-	gluDisk(quadric, 0, 0.5, 15, 15)
+	gluCylinder(quadric,0.6,0.6,0.2,15,15)
+	gluDisk(quadric, 0, 0.6, 15, 15)
 	glTranslatef(0.0,0.0,0.2)
-	gluDisk(quadric, 0, 0.5, 15, 15)
+	gluDisk(quadric, 0, 0.6, 15, 15)
 	
 	glTranslatef(0.0, 0.0, -0.2)
 	glTranslatef(0.0, 0.0, 3.2)
-	gluCylinder(quadric,0.5,0.5,0.2,15,15)
-	gluDisk(quadric, 0, 0.5, 15, 15)
+	gluCylinder(quadric,0.6,0.6,0.2,15,15)
+	gluDisk(quadric, 0, 0.6, 15, 15)
 	glTranslatef(0.0,0.0,0.2)
-	gluDisk(quadric, 0, 0.5, 15, 15)
+	gluDisk(quadric, 0, 0.6, 15, 15)
 	
 	glTranslatef(0.0, 0.0, -0.2)
 	glTranslatef(3.3, 0.0, 0.0)
-	gluCylinder(quadric,0.5,0.5,0.2,15,15)
-	gluDisk(quadric, 0, 0.5, 15, 15)
+	gluCylinder(quadric,0.6,0.6,0.2,15,15)
+	gluDisk(quadric, 0, 0.6, 15, 15)
 	glTranslatef(0.0,0.0,0.2)
-	gluDisk(quadric, 0, 0.5, 15, 15)
+	gluDisk(quadric, 0, 0.6, 15, 15)
+	
+	glColor3f(1.0, 1.0, 1.0)
+	gluDisk(quadric, 0.2, 0.4, 15, 15)
+	glTranslatef(-3.3, 0.0, 0.0)
+	gluDisk(quadric, 0.2, 0.4, 15, 15)
+	glTranslatef(0.0, 0.0, -0.2)
+	glTranslatef(0.0, 0.0, -3.2)
+	gluDisk(quadric, 0.2, 0.4, 15, 15)
+	glTranslatef(+3.3, 0.0, 0.0)
+	gluDisk(quadric, 0.2, 0.4, 15, 15)
 	
 
 
@@ -369,7 +381,7 @@ def renderScene():
 	camera.rotate(0, yrot*0.001, 0.0)
 	
 	#drawSnowMan()
-	#drawCylinder(0.5,0.25)
+	#drawCylinder(0.6,0.25)
 	drawCar()
 
 	idle()
