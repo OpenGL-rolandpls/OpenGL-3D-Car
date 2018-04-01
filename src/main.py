@@ -9,6 +9,8 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
+quadric = None
+
 # Camera Position
 angle = 0.0 			# Camera angle
 x = 0.0
@@ -75,8 +77,8 @@ def mouse(button, state, x, y):
 	if (button == GLUT_LEFT_BUTTON and state == GLUT_DOWN):
 		mouseDown = True
 		
-		xdiff = x - yrot
-		ydiff = -y + xrot
+		xdiff = x + yrot
+		ydiff = -y - xrot
 		print(str(xdiff)+ " "+ str(ydiff))
 	else:
 		mouseDown = False
@@ -85,8 +87,8 @@ def mouse(button, state, x, y):
 def mouseMotion(x, y):
 	global yrot, xrot, mouseDown
 	if (mouseDown):
-		yrot = x - xdiff
-		xrot = y + ydiff
+		yrot = - x + xdiff
+		xrot = - y - ydiff
 		#print(mouseDown)
 
 def processSpecialKeys(key, xx, yy):
@@ -286,6 +288,38 @@ def drawCar():
 	glVertex3f(1.15, 0.34, -z+0.1)
 	glEnd()
 	glDisable(GL_BLEND)
+	
+	quadric = gluNewQuadric()
+	gluQuadricNormals(quadric, GLU_SMOOTH)
+	gluQuadricTexture(quadric, GL_TRUE)
+	glTranslatef(1.7,-1.0,-1.7)
+	gluCylinder(quadric,0.5,0.5,0.2,15,15)
+	gluDisk(quadric, 0, 0.5, 15, 15)
+	glTranslatef(0.0,0.0,0.2)
+	gluDisk(quadric, 0, 0.5, 15, 15)
+	
+	glTranslatef(0.0, 0.0, -0.2)
+	glTranslatef(-3.3, 0.0, 0.0)
+	gluCylinder(quadric,0.5,0.5,0.2,15,15)
+	gluDisk(quadric, 0, 0.5, 15, 15)
+	glTranslatef(0.0,0.0,0.2)
+	gluDisk(quadric, 0, 0.5, 15, 15)
+	
+	glTranslatef(0.0, 0.0, -0.2)
+	glTranslatef(0.0, 0.0, 3.2)
+	gluCylinder(quadric,0.5,0.5,0.2,15,15)
+	gluDisk(quadric, 0, 0.5, 15, 15)
+	glTranslatef(0.0,0.0,0.2)
+	gluDisk(quadric, 0, 0.5, 15, 15)
+	
+	glTranslatef(0.0, 0.0, -0.2)
+	glTranslatef(3.3, 0.0, 0.0)
+	gluCylinder(quadric,0.5,0.5,0.2,15,15)
+	gluDisk(quadric, 0, 0.5, 15, 15)
+	glTranslatef(0.0,0.0,0.2)
+	gluDisk(quadric, 0, 0.5, 15, 15)
+	
+
 
 def renderScene():
 	global x, z, dX, dZ, angle, camera
