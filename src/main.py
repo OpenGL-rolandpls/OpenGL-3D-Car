@@ -173,13 +173,35 @@ def drawCylinder(height, radius):
 
 def drawCar():
 	z = 1.5 
-	#back
+
+	#back window frame
 	glColor3f(206/255, 20/255, 55/255)
+	glBegin(GL_QUADS)
+	glVertex3f(-3.0, 0.25, -z)
+	glVertex3f(-3.0, 0.25, z)
+	glVertex3f(-3.0, -1.0, z)
+	glVertex3f(-3.0, -1.0, -z)
+	glEnd()
+
 	glBegin(GL_QUADS)
 	glVertex3f(-3.0, 1.5, -z)
 	glVertex3f(-3.0, 1.5, z)
-	glVertex3f(-3.0, -1.0, z)
-	glVertex3f(-3.0, -1.0, -z)
+	glVertex3f(-3.0, 1.0, z)
+	glVertex3f(-3.0, 1.0, -z)
+	glEnd()
+
+	glBegin(GL_QUADS)
+	glVertex3f(-3.0, 0.25, -z)
+	glVertex3f(-3.0, 0.25, -z+0.5)
+	glVertex3f(-3.0, 1.0, -z+0.5)
+	glVertex3f(-3.0, 1.0, -z)
+	glEnd()
+
+	glBegin(GL_QUADS)
+	glVertex3f(-3.0, 0.25, z-0.5)
+	glVertex3f(-3.0, 0.25, z)
+	glVertex3f(-3.0, 1.0, z)
+	glVertex3f(-3.0, 1.0, z-0.5)
 	glEnd()
 
 	#top
@@ -366,6 +388,18 @@ def drawCar():
 	glVertex3f(0.5, 1.5, z)
 	glVertex3f(1.2, 0.25, z)
 	glVertex3f(1.2, 0.25, -z)
+	glEnd()
+	glDisable(GL_BLEND)
+
+	#back window glass
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+	glEnable(GL_BLEND)
+	glColor4f(90/255, 90/255, 90/255, 0.3)
+	glBegin(GL_QUADS)
+	glVertex3f(-2.99, 0.25, -z+0.5)
+	glVertex3f(-2.99, 0.25, z-0.5)
+	glVertex3f(-2.99, 1.0, z-0.5)
+	glVertex3f(-2.99, 1.0, -z+0.5)
 	glEnd()
 	glDisable(GL_BLEND)
 
