@@ -414,6 +414,87 @@ def drawCar():
 	glVertex3f(-3.0, -0.7, z+0.0013)
 	glEnd()
 
+	#left mirror
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+	glEnable(GL_BLEND)
+	glColor4f(190/255, 190/255, 190/255, 0.6)
+	glBegin(GL_QUADS)
+	glVertex3f(0.85, 0.5, -z-0.4)
+	glVertex3f(0.85, 0.5, -z)
+	glVertex3f(0.85, 0.25, -z)
+	glVertex3f(0.85, 0.25, -z-0.4)
+	glEnd()
+	glDisable(GL_BLEND)
+
+	glColor3f(180/255, 30/255, 30/255)
+	glBegin(GL_QUADS)
+	glVertex3f(0.85, 0.5, -z-0.4)
+	glVertex3f(1, 0.5, -z-0.4)
+	glVertex3f(1, 0.25, -z-0.4)
+	glVertex3f(0.85, 0.25, -z-0.4)
+
+	glVertex3f(0.85, 0.5, -z-0.4)
+	glVertex3f(0.85, 0.5, -z)
+	glVertex3f(1, 0.5, -z)
+	glVertex3f(1, 0.5, -z-0.4)
+
+	glVertex3f(1, 0.5, -z-0.4)
+	glVertex3f(1, 0.5, -z)
+	glVertex3f(1, 0.25, -z)
+	glVertex3f(1, 0.25, -z-0.4)
+
+	glVertex3f(0.85, 0.5, -z)
+	glVertex3f(1, 0.5, -z)
+	glVertex3f(1, 0.25, -z)
+	glVertex3f(0.85, 0.25, -z)
+
+	glVertex3f(0.85, 0.25, -z-0.4)
+	glVertex3f(0.85, 0.25, -z)
+	glVertex3f(1, 0.25, -z)
+	glVertex3f(1, 0.25, -z-0.4)
+
+	glEnd()
+
+	#right mirror
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+	glEnable(GL_BLEND)
+	glColor4f(190/255, 190/255, 190/255, 0.6)
+	glBegin(GL_QUADS)
+	glVertex3f(0.85, 0.5, z+0.4)
+	glVertex3f(0.85, 0.5, z)
+	glVertex3f(0.85, 0.25, z)
+	glVertex3f(0.85, 0.25, z+0.4)
+	glEnd()
+	glDisable(GL_BLEND)
+
+	glColor3f(180/255, 30/255, 30/255)
+	glBegin(GL_QUADS)
+	glVertex3f(0.85, 0.5, z+0.4)
+	glVertex3f(1, 0.5, z+0.4)
+	glVertex3f(1, 0.25, z+0.4)
+	glVertex3f(0.85, 0.25, z+0.4)
+
+	glVertex3f(1, 0.5, z+0.4)
+	glVertex3f(1, 0.5, z)
+	glVertex3f(1, 0.25, z)
+	glVertex3f(1, 0.25, z+0.4)
+
+	glVertex3f(0.85, 0.5, z+0.4)
+	glVertex3f(0.85, 0.5, z)
+	glVertex3f(1, 0.5, z)
+	glVertex3f(1, 0.5, z+0.4)
+
+	glVertex3f(0.85, 0.5, z)
+	glVertex3f(1, 0.5, z)
+	glVertex3f(1, 0.25, z)
+	glVertex3f(0.85, 0.25, z)
+
+	glVertex3f(0.85, 0.25, z+0.4)
+	glVertex3f(0.85, 0.25, z)
+	glVertex3f(1, 0.25, z)
+	glVertex3f(1, 0.25, z+0.4)
+	glEnd()
+
 	#left window glass
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 	glEnable(GL_BLEND)
