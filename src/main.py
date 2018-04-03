@@ -229,6 +229,51 @@ def drawCar():
 	glVertex3f(3.0, 0.15, -z)
 	glVertex3f(3.0, 0.15, z)
 	glVertex3f(3.0, -1.0, z)
+
+	#lampu
+	glColor3f(0.9,0.9,0.9)
+	glVertex3f(3.006, -0.65, -z+0.101)
+	glVertex3f(3.006, -0.35, -z+0.101)
+	glVertex3f(3.006, -0.35, -z+0.601)
+	glVertex3f(3.006, -0.65, -z+0.601)
+
+	glVertex3f(3.006, -0.65, z-0.101)
+	glVertex3f(3.006, -0.35, z-0.101)
+	glVertex3f(3.006, -0.35, z-0.601)
+	glVertex3f(3.006, -0.65, z-0.601)
+
+	glColor3f(0,0,0)
+	glVertex3f(3.006, -0.6, -z+1)
+	glVertex3f(3.006, -0.37, -z+1)
+	glVertex3f(3.006, -0.37, z-1)
+	glVertex3f(3.006, -0.6, z-1)
+	#lampu2
+	glColor3f(0.6,0.6,0.6)
+	glVertex3f(3.005, -0.7, -z)
+	glVertex3f(3.005, -0.3, -z)
+	glVertex3f(3.005, -0.3, z)
+	glVertex3f(3.005, -0.7, z)
+
+	glVertex3f(2.9, -0.3, -z-0.0014)
+	glVertex3f(3.0, -0.3, -z-0.0014)
+	glVertex3f(3.0, -0.7, -z-0.0014)
+	glVertex3f(2.9, -0.7, -z-0.0014)
+
+	glVertex3f(2.9, -0.3, z+0.0014)
+	glVertex3f(3.0, -0.3, z+0.0014)
+	glVertex3f(3.0, -0.7, z+0.0014)
+	glVertex3f(2.9, -0.7, z+0.0014)
+	
+	glColor3f(226/255, 152/255, 22/255)
+	glVertex3f(2.95, -0.35, z+0.0015)
+	glVertex3f(2.985, -0.35, z+0.0015)
+	glVertex3f(2.985, -0.65, z+0.0015)
+	glVertex3f(2.95, -0.65, z+0.0015)
+
+	glVertex3f(2.95, -0.35, -z-0.0015)
+	glVertex3f(2.985, -0.35, -z-0.0015)
+	glVertex3f(2.985, -0.65, -z-0.0015)
+	glVertex3f(2.95, -0.65, -z-0.0015)
 	glEnd()
 
 	#front cover
@@ -355,6 +400,20 @@ def drawCar():
 	glVertex3f(1.0, 0.25, z)
 	glEnd()
 
+	#side bottom
+	glColor3f(165/255, 8/255, 37/255)
+	glBegin(GL_QUADS)
+	glVertex3f(-3.0, -0.3, -z-0.0013)
+	glVertex3f(3.0, -0.3, -z-0.0013)
+	glVertex3f(3.0, -0.7, -z-0.0013)
+	glVertex3f(-3.0, -0.7, -z-0.0013)
+
+	glVertex3f(-3.0, -0.3, z+0.0013)
+	glVertex3f(3.0, -0.3, z+0.0013)
+	glVertex3f(3.0, -0.7, z+0.0013)
+	glVertex3f(-3.0, -0.7, z+0.0013)
+	glEnd()
+
 	#left window glass
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 	glEnable(GL_BLEND)
@@ -464,7 +523,7 @@ def renderScene():
 	glEnable(GL_LIGHT0)
 	glEnable(GL_LIGHTING)
 
-	glEnable(GL_DEPTH_TEST)
+	# glEnable(GL_DEPTH_TEST)
 	glDepthFunc(GL_LEQUAL)
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST)
 	
